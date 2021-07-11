@@ -31,6 +31,7 @@ function main() {
         var videoComp = duplicateComposition(mainComp, renderFolder);
         // noinspection JSUnresolvedFunction
         videoComp.name = videoName;
+        videoComp.openInViewer();
 
         // noinspection JSUnresolvedFunction,JSUnresolvedVariable
         videoComp.layer("name-ru").text.sourceText.setValue(videoParams.nameRu);
@@ -40,8 +41,6 @@ function main() {
         videoComp.layer("producer").text.sourceText.setValue(videoParams.producer);
         // noinspection JSUnresolvedFunction,JSUnresolvedVariable
         videoComp.layer("bio").text.sourceText.setValue(videoParams.bio);
-        // noinspection JSUnresolvedFunction,JSUnresolvedVariable
-        videoComp.layer("duration").text.sourceText.setValue(videoParams.duration);
     }
     alert("Generation completed");
 }
