@@ -3,12 +3,12 @@ let path = require('path');
 
 let csv = fs.readFileSync(path.join(__dirname, "..", "data", "videos.csv")).toString();
 
-let rows = csv.substring(1);
+let rows = csv;
 
 if (rows.indexOf('\r\n') !== -1) {
-    rows = csv.split('\r\n');
+    rows = rows.split('\r\n');
 } else {
-    rows = csv.split('\n');
+    rows = rows.split('\n');
 }
 
 rows.pop();
@@ -17,17 +17,10 @@ let videosObj = {
     videos: []
 }
 
-let inData = rows.length;
-let maxNameLength = 0;
-let maxNameRuLength = 0;
-let maxProducerLength = 0;
+const CSVLength = rows.length;
 let errors = 0;
 
 rows.forEach((value, index) => {
-    // console.log(`processing row: ${index + 1}`);
-
-    // \"
-
     const splittedRow = value.split(";");
     let data = splittedRow[0];
 
@@ -35,15 +28,13 @@ rows.forEach((value, index) => {
     data = data.substring(1)
     data = data.substring(0, data.length - 2);
 
-    data.replace(" /", " / ");
-    data.replace("/ ", " / ");
-    data.replace("/", " / ");
     data = data.split(' / ');
 
+    // проверяем верно ли парсится строка с данными на английском
     if (data.length !== 5) {
         errors += 1;
-        console.log(`data consistency error in row: ${index + 1}`);
-        console.log(data);
+        console.error(`data consistency error in row: ${index + 1}`);
+        console.error(data);
     } else {
         let video = {
             name: data[0],
@@ -59,20 +50,7 @@ rows.forEach((value, index) => {
             console.log(`wrong duration format in row: ${index + 1}`);
         }
 
-        if (video.nameRu.length > maxNameRuLength) {
-            maxNameRuLength = video.nameRu.length
-        }
-
-        if (video.name.length > maxNameLength) {
-            maxNameLength = video.name.length
-        }
-
-        if (video.producer.length > maxProducerLength) {
-            maxProducerLength = video.producer.length
-        }
-
-
-        if (video.nameRu.length > 0) {
+        if (video.nameRu.length > 1) {
             videosObj.videos.push(video);
         }
     }
@@ -80,10 +58,6 @@ rows.forEach((value, index) => {
 
 fs.writeFileSync(path.join(__dirname, "..", "data", "videos.json"), JSON.stringify(videosObj));
 
-console.log(`videos in CSV: ${inData}`);
+console.log(`videos in CSV: ${CSVLength}`);
 console.log(`videos in JSON: ${videosObj.videos.length}`);
-console.log(`max name length: ${maxNameLength}`);
-console.log(`max name ru length: ${maxNameRuLength}`);
-console.log(`max producer length: ${maxProducerLength}`);
-
 console.log(`errors: ${errors}`);

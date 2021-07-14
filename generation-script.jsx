@@ -30,7 +30,7 @@ function main() {
         /** дублируем главную композицию и все ее динамические зависимости из папки src */
         var videoComp = duplicateComposition(mainComp, renderFolder);
         // noinspection JSUnresolvedFunction
-        videoComp.name = videoName;
+        videoComp.name = videoName + '_intro';
         videoComp.openInViewer();
 
         // noinspection JSUnresolvedFunction,JSUnresolvedVariable
