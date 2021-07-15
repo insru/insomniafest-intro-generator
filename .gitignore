@@ -1,8 +1,13 @@
 .DS_Store
+.cfa
+.pek
 
 # AE directories
 Adobe After Effects Auto-Save
+Adobe Premiere Pro Audio Previews
+Adobe Premiere Pro Auto-Save
 intro_AME
+intro_2021_AME
 
 # editor directories and files
 .idea
