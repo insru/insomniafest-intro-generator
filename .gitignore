@@ -1,6 +1,6 @@
 .DS_Store
-.cfa
-.pek
+*.cfa
+*.pek
 
 # AE directories
 Adobe After Effects Auto-Save
