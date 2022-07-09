@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "outDir": "dist",
+        "target": "es2021",
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "baseUrl": "src",
+        "strict": true
+    },
+    "exclude": [
+        "node_modules",
+        "deployment",
+        "dist"
+    ],
+    "include": [
+        "src/*"
+    ]
+}

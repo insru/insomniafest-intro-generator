@@ -10,8 +10,10 @@ $ brew install node
 ## Prepare data
 - Fill data in data/videos.csv
 ```bash
+# Install deps
+$ npm i
 # Run CSV to JSON converter
-$ node helpers/csvToJsonConverter.js
+$ npm run start
 ```
 - Check and edit generated data in data/videos.json
 

@@ -1,0 +1,27 @@
+{
+    "name": "insomniafest-intro-generator",
+    "version": "1.0.0",
+    "description": "## Before run",
+    "main": "index.js",
+    "directories": {
+        "lib": "lib"
+    },
+    "scripts": {
+        "start": "ts-node src/csvToJsonConverter.ts"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/insru/insomniafest-intro-generator.git"
+    },
+    "dependencies": {
+        "@types/node": "^17.0.14",
+        "ts-node-dev": "^1.1.8",
+        "typescript": "^4.5.5"
+    },
+    "author": "Artem Nikonov",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/insru/insomniafest-intro-generator/issues"
+    },
+    "homepage": "https://github.com/insru/insomniafest-intro-generator#readme"
+}
