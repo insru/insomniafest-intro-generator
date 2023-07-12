@@ -1,31 +1,49 @@
 import {readFileSync, writeFileSync} from 'fs';
 import {join} from 'path';
 
-const csv: string = readFileSync(join(__dirname, '..', 'data', 'videos.csv')).toString();
+const csv: string = readFileSync(join(__dirname, '..', 'data', 'video2023.csv')).toString();
 
-let rows: Array<string> = csv.indexOf('\r\n') !== -1 ? csv.split('\r\n') : csv.split('\n');
+const rows: Array<string> = csv.indexOf('\r\n') !== -1 ? csv.split('\r\n') : csv.split('\n');
 rows.pop();
 
-let videos: Array<VideoData> = [];
+const videos: Array<VideoData> = [];
 let errors = 0;
 
-rows.forEach((value, index) => {
-    const splittedRow: Array<string> = value.split(';');
-    const firstColumn: string = splittedRow[0];
-    const secondColumn: string = splittedRow[1];
+let longestName = '';
+let longestNameRu = '';
+let longestProducer = '';
+let longestBio = '';
 
-    const mainData: Array<string> = firstColumn.split(' / ');
-
-    if (mainData.length !== 5) {
+rows.forEach((row, index) => {
+    const parts = row.split(' / ');
+    if (parts.length !== 6) {
         errors += 1;
-        console.error(`data consistency error in row ${index + 1}: ${mainData.join(' / ')}`);
+        console.error(`data consistency error in row ${index + 1}: ${row}`);
     } else {
-        videos.push({
-            name: mainData[0],
-            nameRu: secondColumn,
-            producer: mainData[1],
-            bio: mainData[2] + ' / ' + mainData[3] + ' / ' + mainData[4]
-        });
+        const video = {
+            name: parts[0],
+            nameRu: parts[1],
+            producer: parts[2],
+            bio: `${parts[3]} / ${parts[4]} / ${parts[5]}`
+        };
+
+        videos.push(video);
+
+        if (longestName.length < video.name.length) {
+            longestName = video.name;
+        }
+
+        if (longestNameRu.length < video.nameRu.length) {
+            longestNameRu = video.nameRu;
+        }
+
+        if (longestProducer.length < video.producer.length) {
+            longestProducer = video.producer;
+        }
+
+        if (longestBio.length < video.bio.length) {
+            longestBio = video.bio;
+        }
     }
 });
 
@@ -34,6 +52,11 @@ writeFileSync(join(__dirname, '..', 'data', 'videos.json'), JSON.stringify({vide
 console.log(`videos in CSV: ${rows.length}`);
 console.log(`videos in JSON: ${videos.length}`);
 console.log(`errors: ${errors}`);
+console.log(`longest params:`);
+console.log(longestName);
+console.log(longestNameRu);
+console.log(longestProducer);
+console.log(longestBio);
 
 interface VideoData {
     name: string,
