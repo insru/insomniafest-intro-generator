@@ -1,7 +1,7 @@
 import {readFileSync, writeFileSync} from 'fs';
 import {join} from 'path';
 
-const csv: string = readFileSync(join(__dirname, '..', 'data', 'video2023.csv')).toString();
+const csv: string = readFileSync(join(__dirname, '..', 'data', 'video2024.csv')).toString();
 
 const rows: Array<string> = csv.indexOf('\r\n') !== -1 ? csv.split('\r\n') : csv.split('\n');
 rows.pop();
@@ -22,9 +22,9 @@ rows.forEach((row, index) => {
     } else {
         const video = {
             name: parts[0],
-            nameRu: parts[1],
-            producer: parts[2],
-            bio: `${parts[3]} / ${parts[4]} / ${parts[5]}`
+            nameRu: parts[5],
+            producer: parts[1],
+            bio: `${parts[2]} / ${parts[3]} / ${parts[4]}`
         };
 
         videos.push(video);
