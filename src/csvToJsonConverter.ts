@@ -1,7 +1,7 @@
 import {readFileSync, writeFileSync} from 'fs';
 import {join} from 'path';
 
-const csv: string = readFileSync(join(__dirname, '..', 'data', 'video2024.csv')).toString();
+const csv: string = readFileSync(join(__dirname, '..', 'data', 'video2025.csv')).toString();
 
 const rows: Array<string> = csv.indexOf('\r\n') !== -1 ? csv.split('\r\n') : csv.split('\n');
 rows.pop();
